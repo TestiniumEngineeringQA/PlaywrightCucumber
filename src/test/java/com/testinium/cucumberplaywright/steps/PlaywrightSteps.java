@@ -239,6 +239,17 @@ public class PlaywrightSteps {
         page().locator(".figure").first().hover();
     }
 
+    @When("I hover over the first user avatar error")
+    public void iHoverOverTheFirstUserAvatarError() {
+        PlaywrightRuntime.markStep("hover-first-avatar-error");
+        page().locator(".figure-error").first().hover();
+    }
+
+    @When("I hover over the first user avatar wait")
+    public void iHoverOverTheFirstUserAvatarWait() {
+        page().waitForTimeout(20 * 60 * 1000);
+    }
+
     @Then("I should see that user's profile link")
     public void iShouldSeeThatUsersProfileLink() {
         PlaywrightRuntime.markStep("assert-profile-link");

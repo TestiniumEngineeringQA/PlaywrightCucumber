@@ -48,3 +48,18 @@ Feature: Playwright cases
     Given I open the hovers page
     When I hover over the first user avatar
     Then I should see that user's profile link
+
+  Scenario: Reveal hidden content on hover error
+    Given I open the hovers page
+    When I hover over the first user avatar error
+    Then I should see that user's profile link
+
+  Scenario: Reveal hidden content on hover wait
+    Given I open the hovers page
+    When I hover over the first user avatar wait
+    Then I should see that user's profile link
+
+  Scenario: No such scenario
+    Given No such scenario step
+    When I hover over the first user avatar
+    Then I should see that user's profile link
