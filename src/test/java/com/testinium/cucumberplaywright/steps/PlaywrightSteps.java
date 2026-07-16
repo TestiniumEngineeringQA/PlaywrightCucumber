@@ -482,6 +482,6 @@ public class PlaywrightSteps {
     @When("I delete the added element")
     public void iDeleteTheAddedElement() {
         PlaywrightRuntime.markStep("delete-added-element");
-        page().locator(".added-manually").click();
+        page().locator(".added-manually-ERROR").click();
     }
 }
