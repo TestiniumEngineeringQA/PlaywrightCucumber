@@ -362,4 +362,126 @@ public class PlaywrightSteps {
         PlaywrightRuntime.markStep("assert-saved-notes");
         Assert.assertEquals(docString, page().locator("#saved-notes").textContent());
     }
+
+    // ---- Multi-step user journey (the-internet.herokuapp.com) ----
+
+    @Given("I open the login page")
+    public void iOpenTheLoginPage() {
+        PlaywrightRuntime.markStep("open-real-login-page");
+        page().navigate("https://the-internet.herokuapp.com/login");
+    }
+
+    @Then("I should see {string} in the page title")
+    public void iShouldSeeInThePageTitle(String expectedFragment) {
+        PlaywrightRuntime.markStep("assert-page-title-contains");
+        Assert.assertTrue(page().title().contains(expectedFragment));
+    }
+
+    @When("I enter the username {string}")
+    public void iEnterTheUsername(String username) {
+        PlaywrightRuntime.markStep("enter-username");
+        page().locator("#username").fill(username);
+    }
+
+    @When("I enter the password {string}")
+    public void iEnterThePassword(String password) {
+        PlaywrightRuntime.markStep("enter-password");
+        page().locator("#password").fill(password);
+    }
+
+    @When("I submit the site login form")
+    public void iSubmitTheSiteLoginForm() {
+        PlaywrightRuntime.markStep("submit-site-login-form");
+        page().locator("button[type='submit']").click();
+    }
+
+    @Then("I should see the login success message {string}")
+    public void iShouldSeeTheLoginSuccessMessage(String expectedFragment) {
+        PlaywrightRuntime.markStep("assert-site-login-success");
+        Assert.assertTrue(page().locator("#flash").textContent().contains(expectedFragment));
+    }
+
+    @Given("I open the checkboxes page")
+    public void iOpenTheCheckboxesPage() {
+        PlaywrightRuntime.markStep("open-checkboxes-page");
+        page().navigate("https://the-internet.herokuapp.com/checkboxes");
+    }
+
+    @Then("the first checkbox should be unchecked")
+    public void theFirstCheckboxShouldBeUnchecked() {
+        PlaywrightRuntime.markStep("assert-first-checkbox-unchecked");
+        Assert.assertFalse(page().locator("#checkboxes input[type='checkbox']").nth(0).isChecked());
+    }
+
+    @When("I check the first checkbox")
+    public void iCheckTheFirstCheckbox() {
+        PlaywrightRuntime.markStep("check-first-checkbox");
+        page().locator("#checkboxes input[type='checkbox']").nth(0).check();
+    }
+
+    @Then("the first checkbox should be checked")
+    public void theFirstCheckboxShouldBeChecked() {
+        PlaywrightRuntime.markStep("assert-first-checkbox-checked");
+        Assert.assertTrue(page().locator("#checkboxes input[type='checkbox']").nth(0).isChecked());
+    }
+
+    @Then("the second checkbox should be checked")
+    public void theSecondCheckboxShouldBeChecked() {
+        PlaywrightRuntime.markStep("assert-second-checkbox-checked");
+        Assert.assertTrue(page().locator("#checkboxes input[type='checkbox']").nth(1).isChecked());
+    }
+
+    @When("I uncheck the second checkbox")
+    public void iUncheckTheSecondCheckbox() {
+        PlaywrightRuntime.markStep("uncheck-second-checkbox");
+        page().locator("#checkboxes input[type='checkbox']").nth(1).uncheck();
+    }
+
+    @Then("the second checkbox should be unchecked")
+    public void theSecondCheckboxShouldBeUnchecked() {
+        PlaywrightRuntime.markStep("assert-second-checkbox-unchecked");
+        Assert.assertFalse(page().locator("#checkboxes input[type='checkbox']").nth(1).isChecked());
+    }
+
+    @Given("I open the dropdown page")
+    public void iOpenTheDropdownPage() {
+        PlaywrightRuntime.markStep("open-dropdown-page");
+        page().navigate("https://the-internet.herokuapp.com/dropdown");
+    }
+
+    @When("I select dropdown option {string}")
+    public void iSelectDropdownOption(String value) {
+        PlaywrightRuntime.markStep("select-dropdown-option");
+        page().locator("#dropdown").selectOption(value);
+    }
+
+    @Then("the selected dropdown option should be {string}")
+    public void theSelectedDropdownOptionShouldBe(String expectedValue) {
+        PlaywrightRuntime.markStep("assert-dropdown-value");
+        Assert.assertEquals(expectedValue, page().locator("#dropdown").inputValue());
+    }
+
+    @Given("I open the add remove elements page")
+    public void iOpenTheAddRemoveElementsPage() {
+        PlaywrightRuntime.markStep("open-add-remove-elements-page");
+        page().navigate("https://the-internet.herokuapp.com/add_remove_elements/");
+    }
+
+    @When("I add a new element")
+    public void iAddANewElement() {
+        PlaywrightRuntime.markStep("add-new-element");
+        page().locator("text=Add Element").click();
+    }
+
+    @Then("I should see {int} added element(s)")
+    public void iShouldSeeNAddedElements(int expectedCount) {
+        PlaywrightRuntime.markStep("assert-added-elements-count");
+        Assert.assertEquals(expectedCount, page().locator(".added-manually").count());
+    }
+
+    @When("I delete the added element")
+    public void iDeleteTheAddedElement() {
+        PlaywrightRuntime.markStep("delete-added-element");
+        page().locator(".added-manually").click();
+    }
 }

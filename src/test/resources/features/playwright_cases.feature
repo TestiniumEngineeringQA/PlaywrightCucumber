@@ -64,3 +64,26 @@ Feature: Playwright cases
     Given No such scenario step
     When I hover over the first user avatar
     Then I should see that user's profile link
+
+  Scenario: Complete a multi-step user journey
+    Given I open the login page
+    Then I should see "The Internet" in the page title
+    When I enter the username "tomsmith"
+    And I enter the password "SuperSecretPassword!"
+    And I submit the site login form
+    Then I should see the login success message "You logged into a secure area"
+    Given I open the checkboxes page
+    Then the first checkbox should be unchecked
+    When I check the first checkbox
+    Then the first checkbox should be checked
+    Then the second checkbox should be checked
+    When I uncheck the second checkbox
+    Then the second checkbox should be unchecked
+    Given I open the dropdown page
+    When I select dropdown option "2"
+    Then the selected dropdown option should be "2"
+    Given I open the add remove elements page
+    When I add a new element
+    Then I should see 1 added element
+    When I delete the added element
+    Then I should see 0 added elements
