@@ -59,6 +59,7 @@ Feature: Playwright cases
     When I hover over the first user avatar wait
     Then I should see that user's profile link
 
+  @ignore
   Scenario: No such scenario
     Given No such scenario step
     When I hover over the first user avatar

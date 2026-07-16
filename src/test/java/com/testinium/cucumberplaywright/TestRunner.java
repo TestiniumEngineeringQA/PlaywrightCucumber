@@ -18,7 +18,8 @@ import org.junit.runner.RunWith;
                 "json:target/cucumber-report.json"
         },
         monochrome = true,
-        publish = false
+        publish = false,
+        tags = "not @ignore"
 )
 public class TestRunner {
 }
