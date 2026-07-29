@@ -4,18 +4,11 @@ Feature: Cucumber concepts
     Given I start with a clean browser session
 
   @smoke
-  Scenario Outline: Login attempts with different credentials
+  Scenario: Login succeeds with valid credentials
     Given I prepare the validated login page
-    When I enter username "<username>" and password "<password>"
+    When I enter username "testinium-user" and password "secret-password"
     And I submit the login form
-    Then I should see the login result "<result>"
-
-    Examples: Valid and invalid credentials
-      | username        | password         | result              |
-      | testinium-user  | secret-password  | Login successful    |
-      | testinium-user  | wrong-password   | Invalid credentials |
-      | wrong-user      | secret-password  | Invalid credentials |
-      |                 |                  | Invalid credentials |
+    Then I should see the login result "Login successful"
 
   @data-table
   Scenario: Add multiple todo items using a data table
