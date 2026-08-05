@@ -62,8 +62,8 @@ Feature: Playwright cases
   @ignore
   Scenario: No such scenario
     Given No such scenario step
-    When I hover over the first user avatar
     Then I should see that user's profile link
+    When I hover over the first user avatar
 
   Scenario: Complete a multi-step user journey
     Given I open the login page
